@@ -1,0 +1,23 @@
+<p>The Server Component</p>
+
+
+<!-- DataBinding basically refers to communication or exchange of data between the ts file and the html file
+it can be one way or two way -->
+
+<!-- 
+This is StringInterpolation a type of DataBinding here we send ts data to html template
+Important thing here is when we use {{}} in an Html expression whatever inside this should return a string in simple words a variable or function should return a string
+here we cannot use multi-line expression like if-else only exception here is ternary operator -->
+
+<p  [ngStyle]="{backgroundColor: getColor()}"  
+    [ngClass]="{online: serverStatus==='online'}"
+>This is a {{'Server'}} with ID {{serverId}} and STATUS {{getServerStatus()}}</p>
+ 
+
+<!--  
+[ngStyle]="{style: expression}" uses property binding. with its help we can manipulate the property of that directive which causes overall changes in DOM
+It iakes key value pairs a style name and an expression 
+
+[ngClass]="{cssClass: expression}" adds CSS class if some condition is true  -->
+
+

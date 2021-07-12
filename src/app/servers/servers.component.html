@@ -1,0 +1,88 @@
+<!-- Note - Components are directive with a template and they use element selector
+       Directives are basically instrustions for DOM and they use attribute slector usually 
+
+This is *ngIf="expression" a structural directive i.e. it either adds elements to a dom or remove it -->
+
+<!-- 
+IMP NOTE - The directives are always trying to listen an event like in this case if we have used if else in .ts file then it would be executed
+           only once wheter the condition becomes flase afterwords fix was set timeout function or triggering if else on some event like click of a button
+           A direvtive like *ngIf="expression" if always listening for the condition just analyseze how these two lones work as soon as the condition becomes
+           false it rechecks and disables the para 1 and enables para two in Real Time only by listening for the change -->
+             
+
+<p *ngIf="!allowNewServer">System Inintializing</p>
+<p *ngIf="allowNewServer">System in working state</p>
+
+<!--  
+    Have to READ more about it
+    
+    <ng-template [ngTemplateOutlet]="outlet" [ngOutletContext]="context"></ng-template> can be used the implement else conditon for *ngIf="expression" -->
+
+
+<!-- now comes property binding another typr of data binding
+In this we bind an html element property to TS code useing [] 
+
+Here we added propert binding to the diabled property of the button using []-->
+<div>
+<button class="btn btn-primary" [disabled]="!allowNewServer || serverCount == 20" (click)="onCreateServer()">Add Server</button>
+</div>
+<p></p>
+<div>
+<button class="btn btn-primary" [disabled]="serverCount == 0" (click)="onDeleteServer()">Delete Server</button>
+</div>
+
+<!-- 
+Here we are passing and using Data in eventBinding
+Every event that is performed carries some data with it like click event carries coordinates input event carries input
+so in order use this data which is corresponded to an event we use ($event) and pass it as a parameter to a function
+where it can be used further for eg assigning a value to a variable like below and many more.
+
+NOTE - It is one way binding i.e. whwn we change the value of the element the TS variable value changes but not Vice-Versa -->
+<div></div>
+<!-- <label>Server Name using eventBinding (one way binding HTML-> TS)</label>
+<input type="text"
+    class="form-control"
+    (input)="onUpdateServerName($event)"
+    >
+<div></div> -->
+
+<!-- Two way binding uses a mix of propertyBinding and eventBinding and inside that a directive [(directive)] 
+    Here we didn't passed the event data didn't called any function on event occurance
+    It is simple to implement
+-->
+
+<label>Server Name using twoWayBinding (PB + EB)</label>
+<input type="text"
+    class="form-control"
+    [(ngModel)]="serverName"
+    >
+
+<p>{{serverCreationStatus}}</p>
+<p>{{serverCount}}</p>
+
+<app-server *ngFor="let server of servers"></app-server>
+<!-- IMP Note -  This is *ngFor="let item of list" directive it works like a for loop to replicate a Component in real time
+            It is a structural directive more about this later -->
+
+
+
+<!-- Another one is EventBinding which basically means executing a code on occurance of an event for example Click of a button, pressing Enter etc.
+In this we use (eventName)="function to be excuted" if the code is very small we can use JS inside the "" however it is not recommended.
+
+In the above example we can use onClick property of a button but it is not recommended because different elements have different properties and
+different events can occur that is why angular gives a general syntax.
+
+How do you know to which Properties or Events of HTML Elements you may bind? You can basically bind to all Properties and Events -
+a good idea is to console.log()  the element you're interested in to see which properties and events it offers.
+
+IMPORTANT: For events, you don't bind to onclick but only to click (=> (click)).-->
+
+
+<!-- 
+So when we want to output some data which is the result of any calulations or any data retrival from a database or something we use
+StringInterpolation
+
+And when we want to change change the property of any HTML element or any directive or any Component we use 
+PropertyBinding
+
+NOTE - Do not mix StringInterpolation and PropertyBinding -->
